@@ -24,7 +24,8 @@ cloudinary.config({
 });
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "hotelmanagementsite.netlify.app",
+  // origin: "http://localhost:3000",
   // origin: "*",
   credentials: true,
   //access-control-allow-credentials:true
