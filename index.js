@@ -23,13 +23,17 @@ cloudinary.config({
   api_secret: "f4C1Mhxz1n7ItBmGvPjTF9oXz6M",
 });
 
+// const corsOptions = {
+// origin: "hotelmanagementsite.netlify.app",
+// origin: "http://localhost:3000",
+// origin: "*",
+// credentials: true,
+//access-control-allow-credentials:true
+// optionSuccessStatus: 200,
+// };
 const corsOptions = {
-  origin: "hotelmanagementsite.netlify.app",
-  // origin: "http://localhost:3000",
-  // origin: "*",
+  origin: ["https://hotelmanagementsite.netlify.app"],
   credentials: true,
-  //access-control-allow-credentials:true
-  // optionSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
