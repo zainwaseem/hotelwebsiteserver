@@ -51,12 +51,12 @@ app.use((err, req, res, next) => {
 });
 
 //Routes
-app.use("/api", userRoutes); 
-app.use("/api", feedbackRoutes); 
-app.use("/api", staffRoutes); 
+app.use("/api", userRoutes);
+app.use("/api", feedbackRoutes);
+app.use("/api", staffRoutes);
 app.use("/api", roomRoutes);
 app.get("*", (req, res) => {
-  res.send(`Please Login to access the HMS routes`);
+  res.send(`HMS routes`);
 });
 // Creating Express Server
 const PORT = process.env.PORT || 5000;

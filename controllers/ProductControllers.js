@@ -4,7 +4,15 @@ import mongoose from "mongoose";
 
 const AddProduct = async (req, res, next) => {
   try {
-    let { roomType, availability, price, occupancyStatus, img } = req.body;
+    let {
+      roomType,
+      checkInDate,
+      checkOutDate,
+      availability,
+      price,
+      occupancyStatus,
+      img,
+    } = req.body;
 
     if (!roomType || !availability || !price || !occupancyStatus) {
       return res.json({
@@ -26,6 +34,8 @@ const AddProduct = async (req, res, next) => {
       roomType,
       availability,
       price,
+      checkInDate,
+      checkOutDate,
       occupancyStatus,
     });
     await newProduct.save();
@@ -56,39 +66,17 @@ const getProduct = async (req, res, next) => {
 };
 
 const updateProduct = async (req, res, next) => {
-  let {
-    roomType,
-    availability,
-    price,
-    checkInDate,
-    checkOutDate,
-    occupancyStatus,
-    img,
-  } = req.body;
+  let { availability } = req.body;
+  console.log(req.params.id);
 
-  if (!roomType || !availability || !price || !occupancyStatus) {
-    return res.json({
-      message: "Please provide all details of the product",
-    });
-  }
   // cloudinary
-  let result = await cloudinary.uploader.upload(img, {
-    folder: "rooms",
-  });
-  // console.log(result);
-  img = {
-    public_id: result.public_id,
-    secure_url: result.secure_url,
-  };
+  // let result = await cloudinary.uploader.upload(img, {
+  //   folder: "rooms",
+  // });
+
   try {
     await Room.findByIdAndUpdate(req.params.id, {
-      roomType,
       availability,
-      checkInDate,
-      checkOutDate,
-      price,
-      occupancyStatus,
-      img,
     });
     return res.json({ message: `Room has been Booked` });
   } catch (error) {

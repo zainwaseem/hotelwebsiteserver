@@ -5,9 +5,7 @@ import mongoose from "mongoose";
 
 const register = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { username, email, password, role, active } = req.body;
-    console.log(username, email, password, role);
     console.log(username, email, password, role);
     if (!email || !password) {
       return res.json({
@@ -66,7 +64,7 @@ const login = async (req, res, next) => {
     }
 
     const token = jwt.sign({ id: user._id }, "mysupersecret786", {
-      expiresIn: "5d",
+      expiresIn: "1d",
     });
 
     return res.cookie("token", token, { httpOnly: true }).json({
@@ -109,8 +107,6 @@ const getUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { username, email } = req.body;
-  console.log(req.params.id);
-  console.log(username, email);
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
