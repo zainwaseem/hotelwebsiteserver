@@ -20,6 +20,9 @@ const register = async (req, res, next) => {
     if (userExist) {
       return res.json({ message: "Email already exists" });
     }
+    if (userExist.username === username) {
+      return res.json({ message: "Username already exists" });
+    }
     const hashpass = await bcrypt.hash(req.body.password, 10);
 
     const newUser = new User({
@@ -106,11 +109,16 @@ const getUser = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const { username, email } = req.body;
+  const { username, email, password } = req.body;
+  const usernameExist = await User.findOne({ username });
+  if (usernameExist) {
+    return res.json({ message: "Username already exists" });
+  }
   try {
-    const updatedUser = await User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       req.params.id,
       {
+        password,
         username,
         email,
       },
