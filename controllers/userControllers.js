@@ -5,8 +5,7 @@ import mongoose from "mongoose";
 
 const register = async (req, res, next) => {
   try {
-    const { username, email, password, role, active } = req.body;
-    console.log(username, email, password, role);
+    const { username, email, password, role } = req.body;
     if (!email || !password) {
       return res.json({
         message: "Please fill out all the fields.",
@@ -20,9 +19,6 @@ const register = async (req, res, next) => {
     if (userExist) {
       return res.json({ message: "Email already exists" });
     }
-    if (userExist.username === username) {
-      return res.json({ message: "Username already exists" });
-    }
     const hashpass = await bcrypt.hash(req.body.password, 10);
 
     const newUser = new User({
@@ -30,7 +26,6 @@ const register = async (req, res, next) => {
       email,
       password: hashpass,
       role,
-      active,
     });
 
     const user = await newUser.save();
@@ -115,26 +110,17 @@ const updateUser = async (req, res, next) => {
     return res.json({ message: "Username already exists" });
   }
   try {
-    await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        password,
-        username,
-        email,
-      },
-      { new: true }
-    );
+    await User.findByIdAndUpdate(req.params.id, {
+      password,
+      username,
+      email,
+    });
     return res.json({ message: `Profile Updated` });
   } catch (error) {
     next(error);
   }
 };
 const deleteUser = async (req, res, next) => {
-  // const { _id } = req.params.id;
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    return res.status(404).json({ message: "Not found" });
-  }
-
   try {
     const daletedUser = await User.findByIdAndDelete(req.params.id);
     // console.log(daletedUser)

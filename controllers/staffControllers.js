@@ -25,6 +25,7 @@ const getAllStaff = async (req, res, next) => {
   }
 };
 const deleteStaff = async (req, res, next) => {
+  console.log(req.params.id);
   try {
     await Staff.findByIdAndDelete(req.params.id);
     return res.json({ message: `Deleted` });
