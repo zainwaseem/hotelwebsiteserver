@@ -4,17 +4,13 @@ import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
 import feedbackRoutes from "./routes/feedbackroutes.js";
-// import employeeRoutes from "./routes/EmployeeRoutes.js";
 import roomRoutes from "./routes/ProductRoutes.js";
 import staffRoutes from "./routes/staffRoutes.js";
-// import OrderRoutes from "./routes/OrderRoutes.js";
-// import contactRoutes from "./routes/contactRoutes.js";
-// import stripe from "./routes/stripe.js";
+import inventoryRoutes from "./routes/inventoryroutes.js";
 import * as dotenv from "dotenv";
 dotenv.config();
 const app = express();
 app.use(express.json({ limit: "50mb" }));
-// app.use(express.urlencoded({ limit: "50mb" }));
 
 import { v2 as cloudinary } from "cloudinary";
 cloudinary.config({
@@ -23,14 +19,6 @@ cloudinary.config({
   api_secret: "f4C1Mhxz1n7ItBmGvPjTF9oXz6M",
 });
 
-// const corsOptions = {
-// origin: "hotelmanagementsite.netlify.app",
-// origin: "http://localhost:3000",
-// origin: "*",
-// credentials: true,
-//access-control-allow-credentials:true
-// optionSuccessStatus: 200,
-// };
 const corsOptions = {
   origin: ["https://hotelmanagementsite.netlify.app"],
   // origin: "http://localhost:3000",
@@ -61,6 +49,7 @@ app.use("/api", userRoutes);
 app.use("/api", feedbackRoutes);
 app.use("/api", staffRoutes);
 app.use("/api", roomRoutes);
+app.use("/api", inventoryRoutes);
 app.get("*", (req, res) => {
   res.send(`HMS routes`);
 });

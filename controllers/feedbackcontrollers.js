@@ -22,8 +22,7 @@ const Savefeedback = async (req, res, next) => {
 
 const getAllfeedback = async (req, res, next) => {
   try {
-    const messages = await Feedback.find();
-    // .sort({ name: 1 });
+    const messages = await Feedback.find().sort({ name: 1 });
     return res.json(messages);
   } catch (error) {
     next(error);
@@ -32,7 +31,7 @@ const getAllfeedback = async (req, res, next) => {
 const deletefeedback = async (req, res, next) => {
   try {
     await Feedback.findByIdAndDelete(req.params.id);
-    return res.json({ message: `feed has been deleted` });
+    return res.json({ message: `Feedback has been deleted` });
   } catch (error) {
     next(error);
   }
