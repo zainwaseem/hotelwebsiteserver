@@ -9,7 +9,3 @@ const connectDB = () => {
     .catch((error) => console.log(error.message));
 };
 export default connectDB;
-
-// mongodb username & Password
-// zainwaseem9371
-// En1VwMgSMVo9Oz3n

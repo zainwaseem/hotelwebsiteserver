@@ -32,7 +32,6 @@ app.use(express.json());
 app.use(cookieParser());
 connectDB();
 
-// Error Handling
 app.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || "something went wrong!";
@@ -44,7 +43,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-//Routes
 app.use("/api", userRoutes);
 app.use("/api", feedbackRoutes);
 app.use("/api", staffRoutes);
@@ -53,7 +51,5 @@ app.use("/api", inventoryRoutes);
 app.get("*", (req, res) => {
   res.send(`HMS routes`);
 });
-// Creating Express Server
 const PORT = process.env.PORT || 5000;
-// const port = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

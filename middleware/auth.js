@@ -16,7 +16,6 @@ const isAuthenticated = async (req, res, next) => {
 const isAuthorized = (...roles) => {
   
   return (req, res, next) => {
-    // role !== req.user.role
     if (!roles.includes(req.user.role)) {
       return res.json({
         message: `${req.user.name} is not allowed to perform this operation`,

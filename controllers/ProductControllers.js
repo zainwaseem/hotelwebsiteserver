@@ -20,7 +20,6 @@ const AddProduct = async (req, res, next) => {
       });
     }
 
-    // cloudinary
     let result = await cloudinary.uploader.upload(img, {
       folder: "rooms",
     });
@@ -68,11 +67,6 @@ const getProduct = async (req, res, next) => {
 const updateProduct = async (req, res, next) => {
   let { availability } = req.body;
   console.log(req.params.id);
-
-  // cloudinary
-  // let result = await cloudinary.uploader.upload(img, {
-  //   folder: "rooms",
-  // });
 
   try {
     await Room.findByIdAndUpdate(req.params.id, {

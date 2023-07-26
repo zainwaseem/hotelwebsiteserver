@@ -28,7 +28,6 @@ const AddEmployee = async (req, res, next) => {
         message: "NIC contains 13 digits",
       });
     }
-    // return true if exist othervise false
     const exist = await Employee.findOne({ email });
     if (exist) {
       return res.json({ message: "Email already exists" });
@@ -51,7 +50,6 @@ const AddEmployee = async (req, res, next) => {
     await newEmployee.save();
     return res.json({ message: "Employee added successfully" });
   } catch (error) {
-    // next(error);
     next(error);
   }
 };
@@ -59,7 +57,6 @@ const AddEmployee = async (req, res, next) => {
 const getALLEmployees = async (req, res) => {
   try {
     const employees = await Employee.find();
-    // .sort({ name: 1 })
     return res.json(employees);
   } catch (error) {
     console.log(error);
@@ -105,7 +102,6 @@ const updateEmployee = async (req, res) => {
 };
 const deleteEmployee = async (req, res) => {
   try {
-    // console.log(req.params.id)
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.json({ message: "id is not valid" });
     }

@@ -76,7 +76,6 @@ const login = async (req, res, next) => {
 const getALLUsers = async (req, res, next) => {
   try {
     const users = await User.find();
-    // .sort({ name: 1 });
     return res.json(users);
   } catch (error) {
     next(error);
@@ -123,7 +122,6 @@ const updateUser = async (req, res, next) => {
 const deleteUser = async (req, res, next) => {
   try {
     const daletedUser = await User.findByIdAndDelete(req.params.id);
-    // console.log(daletedUser)
     return res.json({ message: `User has been deleted` });
   } catch (error) {
     next(error);
@@ -138,15 +136,10 @@ const loggedIn = async (req, res, next) => {
     req.user = await User.findById(id);
 
     return res.json({ message: req.user.role, user: req.user });
-    // res.send(true);
   } catch (err) {
     return res.json(false);
   }
 };
-
-// const deactivateUser = async () => {
-//   const { active } = req.body;
-// };
 export {
   register,
   login,
@@ -156,5 +149,4 @@ export {
   updateUser,
   deleteUser,
   loggedIn,
-  // deactivateUser,
 };

@@ -26,7 +26,6 @@ const SaveMssage = async (req, res, next) => {
 const getAllMessages = async (req, res, next) => {
   try {
     const messages = await Contact.find();
-    // .sort({ name: 1 });
     return res.json(messages);
   } catch (error) {
     next(error);
