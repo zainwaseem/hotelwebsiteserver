@@ -65,12 +65,13 @@ const getProduct = async (req, res, next) => {
 };
 
 const updateProduct = async (req, res, next) => {
-  let { availability } = req.body;
+  let { availability, checkInDate, checkOutDate } = req.body;
   console.log(req.params.id);
-
   try {
     await Room.findByIdAndUpdate(req.params.id, {
       availability,
+      checkInDate,
+      checkOutDate,
     });
     return res.json({ message: `Room has been Booked` });
   } catch (error) {
