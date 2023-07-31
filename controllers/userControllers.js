@@ -104,13 +104,10 @@ const getUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { username, email, password } = req.body;
-  const usernameExist = await User.findOne({ username });
-  if (usernameExist) {
-    return res.json({ message: "Username already exists" });
-  }
+  const hashpass = await bcrypt.hash(req.body.password, 10);
   try {
     await User.findByIdAndUpdate(req.params.id, {
-      password,
+      password: hashpass,
       username,
       email,
     });

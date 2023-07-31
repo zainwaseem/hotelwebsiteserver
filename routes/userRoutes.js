@@ -28,6 +28,6 @@ router.delete(
 );
 router.get("/loggedin", loggedIn);
 router.get("/logout", logout);
-router.patch("/users/:id", updateUser);
+router.put("/users/:id", updateUser);
 
 export default router;
