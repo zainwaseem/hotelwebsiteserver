@@ -15,10 +15,6 @@ const usersSchema = new mongoose.Schema(
       type: String,
       default: "guest",
     },
-    active: {
-      type: String,
-      default: true,
-    },
   },
   { timestamps: true }
 );
